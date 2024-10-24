@@ -1,7 +1,6 @@
 package com.voxloud.provisioning.controller;
 
 import com.voxloud.provisioning.service.ProvisioningService;
-import javax.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
