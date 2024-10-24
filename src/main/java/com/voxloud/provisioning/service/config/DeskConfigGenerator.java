@@ -19,7 +19,7 @@ public class DeskConfigGenerator extends AbstractConfigGenerator {
     }
 
     @Override
-    public Map<String, Object> parseOverrideFragment(String overrideFragment) {
+    protected Map<String, Object> parseOverrideFragment(String overrideFragment) {
         return Arrays.stream(overrideFragment.split(LINE_BREAK))
                      .map(line -> line.split(EQUALS))
                      .collect(Collectors.toMap(
@@ -29,7 +29,7 @@ public class DeskConfigGenerator extends AbstractConfigGenerator {
     }
 
     @Override
-    public String formatConfig(Map<String, Object> configMap) {
+    protected String formatConfig(Map<String, Object> configMap) {
         return configMap.entrySet().stream()
                         .map(entry -> entry.getKey() + EQUALS + entry.getValue())
                         .collect(Collectors.joining(LINE_BREAK));

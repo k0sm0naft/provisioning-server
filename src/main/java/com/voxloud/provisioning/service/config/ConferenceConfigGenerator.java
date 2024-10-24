@@ -24,7 +24,7 @@ public class ConferenceConfigGenerator extends AbstractConfigGenerator {
     }
 
     @Override
-    public Map<String, Object> parseOverrideFragment(String overrideFragment) {
+    protected Map<String, Object> parseOverrideFragment(String overrideFragment) {
         try {
             return objectMapper.readValue(overrideFragment, HashMap.class);
         } catch (JsonProcessingException e) {
@@ -33,7 +33,7 @@ public class ConferenceConfigGenerator extends AbstractConfigGenerator {
     }
 
     @Override
-    public String formatConfig(Map<String, Object> configMap) {
+    protected String formatConfig(Map<String, Object> configMap) {
         configMap.forEach((key, value) -> {
             if (value instanceof String && ((String) value).contains(COMMA)) {
                 configMap.put(key, ((String) value).split(COMMA));

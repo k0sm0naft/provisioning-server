@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ProvisioningServiceImpl implements ProvisioningService {
+    private static final String MAC_ADDRESS_PATTERN =
+            "^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$|^([0-9A-Fa-f]{12})$";
+
     private final DeviceRepository deviceRepository;
     private final Map<Device.DeviceModel, ConfigGenerator> configGenerators;
 
@@ -27,6 +30,10 @@ public class ProvisioningServiceImpl implements ProvisioningService {
 
     @Override
     public String getProvisioningFile(String macAddress) {
+        if (!macAddress.matches(MAC_ADDRESS_PATTERN)) {
+            throw new IllegalArgumentException("Invalid MAC address format");
+        }
+
         String normalizedMacAddress = MacAddressUtils.normalize(macAddress);
 
         Device device =
